@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 
 class HotelsController extends Controller
 {
-    public function index($name)
+    public function show($slug)
     {
-        dd($name);
-        return view("home");
+        $hotel = Hotel::where('slug', $slug)->firstOrFail();
+        return view('hotel.show', ['hotel' => $hotel]);
     }
 }

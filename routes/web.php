@@ -4,16 +4,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HotelsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/hotel/{name}', [HotelsController::class, 'index'])->name("hotel.show");
+Route::get('/hotel/{name}', [HotelsController::class, 'show'])->name("hotel.show");
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
