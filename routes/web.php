@@ -13,6 +13,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/hotel/{name}', [HotelsController::class, 'show'])->name("hotel.show");
+Route::get('/hotels/create', [HotelsController::class, 'create'])->name('hotel.create');
+Route::get("hotel/edit", [HotelsController::class, "edit"])->name("hotel.edit");
+Route::get('/hotel', [HotelsController::class, 'index'])->name("hotel");
+
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
