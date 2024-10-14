@@ -24,6 +24,8 @@ Route::prefix('dashboard')->middleware(['auth', AdminMiddleware::class])->group(
 });
 
 Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('hotel.show');
+Route::get('/hotel', [HotelsController::class, 'index'])->name('hotel.index');
+
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
