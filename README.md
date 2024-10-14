@@ -65,3 +65,16 @@ npm run dev
 ### Access the application
 
 Open your browser and go to http://localhost:8000 to view the application.
+
+# Routes
+Basic site routes.
+
+
+| **URL**                     | **Description**                                 | **View Path**                                      |
+|-----------------------------|-------------------------------------------------|----------------------------------------------------|
+| `/`             | Homepage         | `resources/views/index.blade.php`             |
+| `/dashboard`                | Dashboard for authenticated users (admin area). | `resources/views/dashboard/index.blade.php`        |
+| `/dashboard/hotel`         | List of hotels.                                 | `resources/views/dashboard/hotel/index.blade.php`  |
+| `/dashboard/hotel/create`   | Create a new hotel.                             | `resources/views/dashboard/hotel/create.blade.php` |
+| `/dashboard/hotel/{hotel}/edit` | Edit a specific hotel.                      | `resources/views/dashboard/hotel/edit.blade.php`   |
+| `/hotel/{slug}`             | Show hotel details.           | `resources/views/hotel/show.blade.php`             |
