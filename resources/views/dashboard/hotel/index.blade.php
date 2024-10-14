@@ -1,4 +1,4 @@
-@extends('hotel.layout')
+@extends('dashboard.hotel.layout')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         @endif
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-success btn-sm" href="{{ route('hotel.create') }}"><i class="fa fa-plus"></i> Create New Hotel</a>
+            <a class="btn btn-success btn-sm" href="{{ route('dashboard.hotel.create') }}"><i class="fa fa-plus"></i> Create New Hotel</a>
         </div>
 
         <table class="table table-bordered table-striped mt-4">
@@ -19,7 +19,7 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Name</th>
-                    <th>content</th>
+                    <th>Description</th>
                     <th width="250px">Action</th>
                 </tr>
             </thead>
@@ -29,12 +29,12 @@
                 @forelse ($hotels as $hotel)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $hotel->title }}</td>
+                        <td>{{ $hotel->name }}</td>
                         <td>{{ $hotel->description }}</td>
                         <td>
-                            <form action="{{ route('hotel.destroy',$hotel->id) }}" method="POST">
-                                <a class="btn btn-info btn-sm" href="{{ route('hotel.show',$hotel->id) }}"><i class="fa-solid fa-list"></i> Show</a>
-                                <a class="btn btn-primary btn-sm" href="{{ route('hotel.edit',$hotel->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <form action="{{ route('dashboard.hotel.destroy',$hotel->id) }}" method="POST">
+                                <a class="btn btn-info btn-sm" href="{{ route('hotel.show',$hotel->slug) }}"><i class="fa-solid fa-list"></i> Show</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('dashboard.hotel.edit', $hotel->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -48,9 +48,6 @@
                 @endforelse
             </tbody>
         </table>
-        
-        {!! $hotel->links() !!}
-
     </div>
 </div>  
 

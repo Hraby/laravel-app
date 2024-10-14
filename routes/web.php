@@ -5,18 +5,25 @@ use App\Http\Controllers\HotelsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard.index');
+})->middleware(['auth', 'admin'])->name('dashboard');
 
-Route::get('/hotel/{name}', [HotelsController::class, 'show'])->name("hotel.show");
-Route::get('/hotels/create', [HotelsController::class, 'create'])->name('hotel.create');
-Route::get("hotel/edit", [HotelsController::class, "edit"])->name("hotel.edit");
-Route::get('/hotel', [HotelsController::class, 'index'])->name("hotel");
+Route::prefix('dashboard')->middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::get('/hotel', [HotelsController::class, 'index'])->name('dashboard.hotel.index');
+    Route::get('/hotel/create', [HotelsController::class, 'create'])->name('dashboard.hotel.create');
+    Route::post('/hotel', [HotelsController::class, 'store'])->name('dashboard.hotel.store');
+    Route::get('/hotel/{hotel}/edit', [HotelsController::class, 'edit'])->name('dashboard.hotel.edit');
+    Route::put('/hotel/{hotel}', [HotelsController::class, 'update'])->name('dashboard.hotel.update');
+    Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('dashboard.hotel.show');
+    Route::delete('/hotel/{hotel}', [HotelsController::class, 'destroy'])->name('dashboard.hotel.destroy');
+});
 
+Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('hotel.show');
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
@@ -25,5 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

@@ -1,3 +1,7 @@
+@extends('dashboard.hotel.layout')
+
+@section('content')
+
 <div class="card mt-5">
     <h2 class="card-header">Show Hotel</h2>
     <div class="card-body">
@@ -14,19 +18,12 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                 <div class="form-group">
-                    <strong>Location:</strong> <br/>
-                    {{ $hotel->location }}
-                </div>
-                <div class="form-group">
                     <strong>Descriptions:</strong> <br/>
                     {{ $hotel->description }}
-                </div>
-                <div class="form-group">
-                    <strong>Rating:</strong> <br/>
-                    {{ $hotel->rating }}
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+@endsection

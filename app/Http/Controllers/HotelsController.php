@@ -20,26 +20,26 @@ class HotelsController extends Controller
 
     public function create(): View
     {
-        return view("hotel.create");
+        return view("dashboard.hotel.create");
     }
 
     public function store(HotelStoreRequest $request): RedirectResponse
     {
         Hotel::create($request->validated());
 
-        return redirect()->route("hotel.index")->with("success", "Hotel created successfully.");
+        return redirect()->route("dashboard.hotel.index")->with("success", "Hotel created successfully.");
     }
 
     public function edit(Hotel $hotel): View
     {
-        return view('hotel.edit', compact('note'));
+        return view('dashboard.hotel.edit', compact('hotel'));
     }
 
     public function update(HotelUpdateRequest $request, Hotel $hotel): RedirectResponse
     {
         $hotel->update($request->validated());
           
-        return redirect()->route('hotel.index')
+        return redirect()->route('dashboard.hotel.index')
                         ->with('success', 'Hotel updated successfully');
     }
 
@@ -47,15 +47,15 @@ class HotelsController extends Controller
     {
         $hotel->delete();
            
-        return redirect()->route('hotel.index')
+        return redirect()->route('dashboard.hotel.index')
                         ->with('success', 'Hotel deleted successfully');
     }
 
     public function index()
     {
-        $hotels = Hotel::paginate(5);
+        $hotels = Hotel::all();
 
-        return view('hotel.index', compact('hotels'));
+        return view('dashboard.hotel.index', compact('hotels'));
     }
 
 }
