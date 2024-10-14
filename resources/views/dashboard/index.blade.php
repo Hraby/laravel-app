@@ -13,7 +13,7 @@
                         <p>This is your dashboard. You can manage your hotels, view bookings, and more.</p>
             
                         <a href="{{ route('dashboard.hotel.index') }}" class="btn btn-primary">Manage Hotels</a>
-                        <a href="{{ route('dashboard.hotel.create') }}" class="btn btn-success">Add New Hotel</a>
+                        <a href="{{ route('dashboard.reservations.index') }}" class="btn btn-primary">Manage Reservations</a>
                     </div>
                 </div>
             </div>

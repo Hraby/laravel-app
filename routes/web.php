@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +22,7 @@ Route::prefix('dashboard')->middleware(['auth', AdminMiddleware::class])->group(
     Route::put('/hotel/{hotel}', [HotelsController::class, 'update'])->name('dashboard.hotel.update');
     Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('dashboard.hotel.show');
     Route::delete('/hotel/{hotel}', [HotelsController::class, 'destroy'])->name('dashboard.hotel.destroy');
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('dashboard.reservations.index');
 });
 
 Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('hotel.show');
