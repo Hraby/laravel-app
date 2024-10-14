@@ -10,7 +10,6 @@
 </head>
 
 <style>
-        /* Basic styling for the page */
         * {
             margin: 0;
             padding: 0;
