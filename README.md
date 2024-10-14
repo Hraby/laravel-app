@@ -1,2 +1,2 @@
 # Laravel App
-Personal project to learn Laravel framework
+Booking web app build with Laravel
