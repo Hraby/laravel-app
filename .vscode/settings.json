@@ -1,0 +1,7 @@
+{
+  "conventionalCommits.scopes": [
+    "navbar",
+    "homepage",
+    "admin page"
+  ]
+}
