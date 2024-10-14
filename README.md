@@ -78,3 +78,4 @@ Basic site routes.
 | `/dashboard/hotel/create`   | Create a new hotel.                             | `resources/views/dashboard/hotel/create.blade.php` |
 | `/dashboard/hotel/{hotel}/edit` | Edit a specific hotel.                      | `resources/views/dashboard/hotel/edit.blade.php`   |
 | `/hotel/{slug}`             | Show hotel details.           | `resources/views/hotel/show.blade.php`             |
+| `/hotel`             | Search hotels           | `resources/views/hotel/index.blade.php`             |
