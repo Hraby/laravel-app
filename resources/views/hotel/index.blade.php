@@ -218,6 +218,7 @@
         margin-top: 7%;
         text-align: center;
         z-index: 999 !important;
+        box-shadow: 10px 10px 5px #b2babb;
     }
 
     .maskovamainside{
