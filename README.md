@@ -77,5 +77,6 @@ Basic site routes.
 | `/dashboard/hotel`         | List of hotels.                                 | `resources/views/dashboard/hotel/index.blade.php`  |
 | `/dashboard/hotel/create`   | Create a new hotel.                             | `resources/views/dashboard/hotel/create.blade.php` |
 | `/dashboard/hotel/{hotel}/edit` | Edit a specific hotel.                      | `resources/views/dashboard/hotel/edit.blade.php`   |
+| `/dashboard/reservations` | List of reservations.                      | `resources/views/dashboard/reservations/index.blade.php`   |
 | `/hotel/{slug}`             | Show hotel details.           | `resources/views/hotel/show.blade.php`             |
 | `/hotel`             | Search hotels           | `resources/views/hotel/index.blade.php`             |
