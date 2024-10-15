@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Hotel;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -25,6 +26,17 @@ class ReservationController extends Controller
     {
         $users = User::all();
         return view('dashboard.reservations.create', compact('hotel', 'users'));
+    }
+
+    public function booked()
+    {
+        // $user = Auth::user();
+
+        $user_id = 1;
+
+        $reservations = Booking::where('user_id', $user_id)->with('hotel')->get();
+
+        return view('reservations.index', compact('reservations'));
     }
 
     public function store(Request $request, Hotel $hotel)
