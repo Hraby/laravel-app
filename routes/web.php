@@ -15,19 +15,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'admin'])->name('dashboard');
 
 Route::prefix('dashboard')->middleware(['auth', AdminMiddleware::class])->group(function () {
-    Route::get('/hotel', [HotelsController::class, 'index'])->name('dashboard.hotel.index');
+    Route::get('/hotel', [HotelsController::class, 'adminIndex'])->name('dashboard.hotel.index');
     Route::get('/hotel/create', [HotelsController::class, 'create'])->name('dashboard.hotel.create');
     Route::post('/hotel', [HotelsController::class, 'store'])->name('dashboard.hotel.store');
     Route::get('/hotel/{hotel}/edit', [HotelsController::class, 'edit'])->name('dashboard.hotel.edit');
     Route::put('/hotel/{hotel}', [HotelsController::class, 'update'])->name('dashboard.hotel.update');
-    Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('dashboard.hotel.show');
     Route::delete('/hotel/{hotel}', [HotelsController::class, 'destroy'])->name('dashboard.hotel.destroy');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('dashboard.reservations.index');
 });
 
+Route::get('/hotel', [HotelsController::class, 'publicIndex'])->name('hotel.index');
 Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('hotel.show');
-Route::get('/hotel', [HotelsController::class, 'index'])->name('hotel.index');
-
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 

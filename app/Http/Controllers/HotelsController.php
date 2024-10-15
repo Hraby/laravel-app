@@ -51,10 +51,15 @@
                             ->with('success', 'Hotel deleted successfully');
         }
 
-        public function index()
-            {
-                $hotels = Hotel::all();
-                return view('hotel.index', compact('hotels'));
-            }
+        public function adminIndex()
+        {
+            $hotels = Hotel::all();
+            return view('dashboard.hotel.index', compact('hotels'));
+        }
 
+        public function publicIndex()
+        {
+            $hotels = Hotel::where('is_public', true)->get();
+            return view('hotel.index', compact('hotels'));
+        }
     }
