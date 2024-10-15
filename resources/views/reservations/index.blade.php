@@ -161,71 +161,46 @@
     </style>
 </head>
 <body>
-<header>
-            <img src="{{ asset('images/IpsumLogo.png') }}" alt="Logo">
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Search</a>
-                <a href="#">Booked</a>
-                <a href="#">Ipsum</a>
-            </nav>
-            <div class="cta-buttons">
-                    @auth
-                            <a
-                                href="{{ url('/dashboard') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
-                            >
-                                Dashboard
-                            </a>
-                        @else
+    <x-header />
 
-                @if (Route::has('login'))
-                <a href="{{ route('login') }}">Sign in</a>
-
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}">Register</a>
-                @endif
-                @endauth
-                @endif
-            </div>
-        </header>
-
-    <div class="container">
-        <div class="profile-card">
-            <div class="profile-info">
-                <p>Signed in as <strong>Honza Jonkler</strong></p>
-                <button>Sign out</button>
-            </div>
-        </div>
-
-        <div class="reservation-list">
-            <h2>List of reservations</h2>
-
-            <div class="reservation-card">
-                <img src="https://via.placeholder.com/200x150" alt="La Palema Hotel">
-                <div class="reservation-details">
-                    <h3>La Palema Hotel</h3>
-                    <p>2 Person</p>
-                    <p>17. - 21. Nov, 2024</p>
-                    <p class="reservation-price">All inclusive <strong>1,678 $</strong></p>
-                    <p>★ ★ ★ ★ ★ (1634 Visitors)</p>
-                    <p><span class="info">Click for more INFO</span></p>
+    <main>
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-info">
+                    <p>Signed in as <strong>Honza Jonkler</strong></p>
+                    <button>Sign out</button>
                 </div>
             </div>
 
-            <div class="reservation-card">
-                <img src="https://via.placeholder.com/200x150" alt="Hawaii Whale Hotel">
-                <div class="reservation-details">
-                    <h3>Hawaii Whale Hotel</h3>
-                    <p>2 Person</p>
-                    <p>17. - 21. Nov, 2024</p>
-                    <p class="reservation-price">All inclusive <strong>3,798 $</strong></p>
-                    <p>★ ★ ★ ★ ★ (3266 Visitors)</p>
-                    <p><span class="info">Click for more INFO</span></p>
+            <div class="reservation-list">
+                <h2>List of reservations</h2>
+
+                <div class="reservation-card">
+                    <img src="https://via.placeholder.com/200x150" alt="La Palema Hotel">
+                    <div class="reservation-details">
+                        <h3>La Palema Hotel</h3>
+                        <p>2 Person</p>
+                        <p>17. - 21. Nov, 2024</p>
+                        <p class="reservation-price">All inclusive <strong>1,678 $</strong></p>
+                        <p>★ ★ ★ ★ ★ (1634 Visitors)</p>
+                        <p><span class="info">Click for more INFO</span></p>
+                    </div>
+                </div>
+
+                <div class="reservation-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Hawaii Whale Hotel">
+                    <div class="reservation-details">
+                        <h3>Hawaii Whale Hotel</h3>
+                        <p>2 Person</p>
+                        <p>17. - 21. Nov, 2024</p>
+                        <p class="reservation-price">All inclusive <strong>3,798 $</strong></p>
+                        <p>★ ★ ★ ★ ★ (3266 Visitors)</p>
+                        <p><span class="info">Click for more INFO</span></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
 </body>
 </html>

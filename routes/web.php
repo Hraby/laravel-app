@@ -28,8 +28,9 @@ Route::prefix('dashboard')->middleware(['auth', AdminMiddleware::class])->group(
 
 // Route::get('/reservations', [ReservationController::class, 'booked'])->name('reservation.index');
 Route::get('/reservations', [ReservationController::class, 'booked'])->name('reservation.index');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservation.store');
 
-Route::get('/hotel', [HotelsController::class, 'publicIndex'])->name('hotel.index');
+Route::get('/hotel', [HotelsController::class, 'publicIndex'])->name('hotels.index');
 Route::get('/hotel/{slug}', [HotelsController::class, 'show'])->name('hotel.show');
 
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');

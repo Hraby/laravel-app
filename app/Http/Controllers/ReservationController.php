@@ -12,10 +12,10 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        // $reservations = Booking::with('hotel', 'user')->get();
-        // return view('dashboard.reservations.index', compact('reservations'));
-        return view('dashboard.reservations.index');
+        $reservations = Booking::with('user', 'hotel')->get();
+        return view('dashboard.reservations.index', compact('reservations'));
     }
+
 
     public function show(Booking $reservation)
     {
@@ -30,34 +30,33 @@ class ReservationController extends Controller
 
     public function booked()
     {
-        // $user = Auth::user();
+        $user = Auth::user();
 
-        $user_id = 1;
-
-        $reservations = Booking::where('user_id', $user_id)->with('hotel')->get();
+        $reservations = Booking::where('user_id', $user->id)->with('hotel')->get();
 
         return view('reservations.index', compact('reservations'));
     }
 
-    public function store(Request $request, Hotel $hotel)
+
+    public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'room_id' => 'required|exists:rooms,id',
-            'check_in' => 'required|date',
-            'check_out' => 'required|date|after:check_in',
+            'checkin' => 'required|date',
+            'checkout' => 'required|date|after:checkin',
+            'guests' => 'required|integer|min:1',
+            'hotel_id' => 'required|exists:hotels,id',
         ]);
 
         Booking::create([
-            'hotel_id' => $hotel->id,
-            'user_id' => $request->input('user_id'),
-            'room_id' => $request->input('room_id'),
-            'check_in' => $request->input('check_in'),
-            'check_out' => $request->input('check_out'),
+            'hotel_id' => $request->input('hotel_id'),
+            'user_id' => Auth::id(),
+            'check_in' => $request->input('checkin'),
+            'check_out' => $request->input('checkout'),
         ]);
 
         return redirect()->route('dashboard.reservations.index')->with('success', 'Reservation created successfully.');
     }
+
 
     public function destroy(Booking $reservation)
     {
