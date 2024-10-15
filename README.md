@@ -80,3 +80,4 @@ Basic site routes.
 | `/dashboard/reservations` | List of reservations.                      | `resources/views/dashboard/reservations/index.blade.php`   |
 | `/hotel/{slug}`             | Show hotel details.           | `resources/views/hotel/show.blade.php`             |
 | `/hotel`             | Search hotels           | `resources/views/hotel/index.blade.php`             |
+| `/reservations`             | My reservations          | `resources/views/reservations/index.blade.php`             |

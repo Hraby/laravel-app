@@ -93,10 +93,12 @@
     }
 
     .search-bar input {
-        padding: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
         border-radius: 50px 0 0 50px;
         border: none;
         width: 300px;
+        height: 50px;
     }
 
     .search-bar button {
