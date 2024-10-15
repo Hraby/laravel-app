@@ -94,7 +94,7 @@
 
     .search-bar input {
         padding-top: 10px;
-        padding-left: 20px;
+        padding-left: 10px;
         border-radius: 50px 0 0 50px;
         border: none;
         width: 300px;

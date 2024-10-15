@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "navbar",
     "homepage",
-    "admin page"
+    "admin page",
+    "reservations"
   ]
 }
