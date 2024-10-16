@@ -103,6 +103,7 @@
     </style>
 </head>
 <body>
+    <x-header/>
     <div class="container">
         <div class="sidebar">
             <div class="profile">

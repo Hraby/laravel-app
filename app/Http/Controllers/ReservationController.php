@@ -32,17 +32,21 @@ class ReservationController extends Controller
     {
         $user = Auth::user();
 
+        if (!$user) {
+            return view('reservations.index');
+        }
+
         $reservations = Booking::where('user_id', $user->id)->with('hotel')->get();
 
-        return view('reservations.index', compact('reservations'));
+        return view('reservations.index', compact('reservations', 'user'));
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'checkin' => 'required|date',
-            'checkout' => 'required|date|after:checkin',
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after:check_in',
             'guests' => 'required|integer|min:1',
             'hotel_id' => 'required|exists:hotels,id',
         ]);
@@ -50,11 +54,12 @@ class ReservationController extends Controller
         Booking::create([
             'hotel_id' => $request->input('hotel_id'),
             'user_id' => Auth::id(),
-            'check_in' => $request->input('checkin'),
-            'check_out' => $request->input('checkout'),
+            'check_in' => $request->input('check_in'),
+            'check_out' => $request->input('check_out'),
+            'guests' => $request->input('guests'),
         ]);
 
-        return redirect()->route('dashboard.reservations.index')->with('success', 'Reservation created successfully.');
+        return redirect()->route('reservation.index');
     }
 
 

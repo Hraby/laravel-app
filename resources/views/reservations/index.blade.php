@@ -16,6 +16,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            justify-content: center;
         }
 
         header {
@@ -164,41 +165,46 @@
     <x-header />
 
     <main>
-        <div class="container">
+        <div class="container">                    
+            @if(Auth::check())
             <div class="profile-card">
                 <div class="profile-info">
-                    <p>Signed in as <strong>Honza Jonkler</strong></p>
-                    <button>Sign out</button>
+                    <p>Signed in as <strong>{{ $user->name }}</strong></p>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">Sign out</button>
+                    </form>
                 </div>
             </div>
 
             <div class="reservation-list">
                 <h2>List of reservations</h2>
 
-                <div class="reservation-card">
-                    <img src="https://via.placeholder.com/200x150" alt="La Palema Hotel">
-                    <div class="reservation-details">
-                        <h3>La Palema Hotel</h3>
-                        <p>2 Person</p>
-                        <p>17. - 21. Nov, 2024</p>
-                        <p class="reservation-price">All inclusive <strong>1,678 $</strong></p>
-                        <p>★ ★ ★ ★ ★ (1634 Visitors)</p>
-                        <p><span class="info">Click for more INFO</span></p>
-                    </div>
-                </div>
-
-                <div class="reservation-card">
-                    <img src="https://via.placeholder.com/200x150" alt="Hawaii Whale Hotel">
-                    <div class="reservation-details">
-                        <h3>Hawaii Whale Hotel</h3>
-                        <p>2 Person</p>
-                        <p>17. - 21. Nov, 2024</p>
-                        <p class="reservation-price">All inclusive <strong>3,798 $</strong></p>
-                        <p>★ ★ ★ ★ ★ (3266 Visitors)</p>
-                        <p><span class="info">Click for more INFO</span></p>
-                    </div>
-                </div>
+                @if ($reservations->isEmpty())
+                    <p>No reservations found.</p>
+                @else
+                    @foreach ($reservations as $reservation)
+                        <div class="reservation-card">
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8a/e0/b9/bellagio-las-vegas.jpg?w=1200&h=-1&s=1" alt="{{ $reservation->hotel->name }}">
+                            <div class="reservation-details">
+                                <h3>{{ $reservation->hotel->name }}</h3>
+                                <p>{{ $reservation->guests }} Person</p>
+                                <p>{{ $reservation->check_in }} - {{ $reservation->check_out }}</p>
+                                <p class="reservation-price">All inclusive <strong>{{ $reservation->price }} $</strong></p>
+                                <p>
+                                    @for ($i = 0; $i < $reservation->hotel->rating; $i++)
+                                        ★
+                                    @endfor
+                                </p>
+                                <p><span class="info">Click for more INFO</span></p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
+            @else
+                <span>To view reservations, please <a href="{{ route('login') }}">log in</a> or <a href="{{ route('register') }}">register</a>.</span>
+            @endif
         </div>
     </main>
 

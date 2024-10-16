@@ -27,6 +27,7 @@ class BookingController extends Controller
             'customer_id' => $customer->id,
             'check_in' => $request->input('check_in'),
             'check_out' => $request->input('check_out'),
+            'guests' => $request->input('guests'),
         ]);
 
         return response()->json(['message' => 'Rezervace byla úspěšně vytvořena!', 'booking' => $booking]);

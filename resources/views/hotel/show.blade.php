@@ -143,19 +143,22 @@
                 <div class="right">
                     @if(Auth::check())
                         <div class="reservation-form">
-                        <form action="{{ route('reservation.store', $hotel->id) }}" method="POST">
-                            @csrf
-                            <label for="persons">Person:</label>
-                            <input type="number" name="persons" value="1" required min="1">
-
-                            <label for="check_in">Check-in:</label>
-                            <input type="date" name="check_in" required>
-
-                            <label for="check_out">Check-out:</label>
-                            <input type="date" name="check_out" required>
-
-                            <button type="submit">Reserve</button>
-                        </form>
+                            <form action="{{ route('reservation.store', $hotel->id) }}" method="POST">
+                                @csrf
+                            
+                                <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
+                            
+                                <label for="guests">Person:</label>
+                                <input type="number" name="guests" value="1" required min="1">
+                            
+                                <label for="check_in">Check-in:</label>
+                                <input type="date" name="check_in" required>
+                            
+                                <label for="check_out">Check-out:</label>
+                                <input type="date" name="check_out" required>
+                            
+                                <button type="submit">Reserve</button>
+                            </form>                            
                         </div>
                     @else
                         <div class="login-message">
