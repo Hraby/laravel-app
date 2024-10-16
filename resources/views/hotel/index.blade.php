@@ -30,18 +30,6 @@
             margin: 0 auto;
         }
 
-        /* .sidebar {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            width: 100%;
-            height: 420px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 20px;
-            border: 2px solid #019a97;
-        } */
-
 
         .sidebar {
             background-color: #fff;
@@ -63,7 +51,7 @@
             color: #333;
         }
 
-        .sidebar input {
+        .sidebar input, .sidebar label, .sidebar select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -71,6 +59,12 @@
             background-color: #92e4e2;
             border: none;
         }
+
+        .sidebar option {
+            border: none;
+            border-radius: 10px;
+        }
+
 
         .hotel-container {
             display: flex;
@@ -280,7 +274,14 @@
             <input type="text" value="250$" min="1">
 
             <h3>Rating</h3>
-            <input type="text" value="⭐⭐⭐⭐">
+
+                <select id="rating">
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
 
             <div class="reservation-form">
                 <button type="submit">Search</button>
