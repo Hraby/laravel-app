@@ -29,7 +29,7 @@
         gap: 10px;
     }
 
-    .cta-buttons a {
+    .cta-buttons a, .cta-buttons button {
         padding: 10px 20px;
         border-radius: 20px;
         border: 1px solid #4CAF87;
@@ -37,7 +37,7 @@
         color: #019A97;
     }
 
-    .cta-buttons a:nth-child(2) {
+    .cta-buttons button:nth-child(2) {
         background-color: #019A97;
         color: white;
     }
@@ -60,6 +60,15 @@
             >
                 Dashboard
             </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button
+                    href="{{ route('logout') }}"
+                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
+                >
+                    Log out
+            </button>
+            </form>
         @else
             @if (Route::has('login'))
                 <a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}">Sign in</a>

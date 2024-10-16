@@ -15,6 +15,7 @@ class Booking extends Model
         'check_in',
         'check_out',
         'guests',
+        'price',
     ];
 
     public function hotel()

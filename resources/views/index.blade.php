@@ -101,7 +101,9 @@
         height: 50px;
     }
 
-    .search-bar button {
+    .search-bar a {
+        display: flex;
+        align-items: center;
         padding: 10px 20px;
         border-radius: 0 50px 50px 0;
         border: none;
@@ -145,7 +147,7 @@
             <h1>Just A Few Clicks Away<br>From Your Dream Destination</h1>
             <div class="search-bar">
                 <input type="text" placeholder="See our list here">
-                <button>Search</button>
+                <a href="{{route('hotels.index')}}">Search</a>
             </div>
         </div>
         <div class="stats">
