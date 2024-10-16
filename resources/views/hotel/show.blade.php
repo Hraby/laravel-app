@@ -205,8 +205,8 @@
                             
                                 <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
-                                <label for="guests">Location:</label>
-                                <div class="locationbutton">{{ $hotel->location }}</div>
+                                <label for="guests">Hotel Name:</label>
+                                <div class="locationbutton">{{ $hotel->name }}</div>
 
                                 <label id="personodskok" for="guests">Person:</label>
                                 <input type="number" name="guests" value="1" required min="1">
