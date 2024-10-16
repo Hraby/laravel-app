@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+    <title>Home</title>
 
     @vite('resources/css/app.css')
 </head>
@@ -93,13 +93,17 @@
     }
 
     .search-bar input {
-        padding: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
         border-radius: 50px 0 0 50px;
         border: none;
         width: 300px;
+        height: 50px;
     }
 
-    .search-bar button {
+    .search-bar a {
+        display: flex;
+        align-items: center;
         padding: 10px 20px;
         border-radius: 0 50px 50px 0;
         border: none;
@@ -136,41 +140,14 @@
 <body>
     <div class="#">
         <div class="#">
-            <header>
-            <img src="{{ asset('images/IpsumLogo.png') }}" alt="Logo">
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Search</a>
-                <a href="#">Booked</a>
-                <a href="#">Ipsum</a>
-            </nav>
-            <div class="cta-buttons">
-                    @auth
-                            <a
-                                href="{{ url('/dashboard') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
-                            >
-                                Dashboard
-                            </a>
-                        @else
-
-                @if (Route::has('login'))
-                <a href="{{ route('login') }}">Sign in</a>
-
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}">Register</a>
-                @endif
-                @endauth
-                @endif
-            </div>
-        </header>
+            <x-header />
 
         <section class="hero">
         <div class="hero-text">
             <h1>Just A Few Clicks Away<br>From Your Dream Destination</h1>
             <div class="search-bar">
                 <input type="text" placeholder="See our list here">
-                <button>Search</button>
+                <a href="{{route('hotels.index')}}">Search</a>
             </div>
         </div>
         <div class="stats">

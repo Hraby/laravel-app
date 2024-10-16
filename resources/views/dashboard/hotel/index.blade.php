@@ -2,6 +2,7 @@
 
 @section('content')
 
+<x-header/>
 <div class="card mt-5">
     <h2 class="card-header">Hotely</h2>
     <div class="card-body">

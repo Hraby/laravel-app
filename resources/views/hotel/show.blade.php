@@ -1,270 +1,234 @@
-    <div class="maskovanidiv"></div>
-    <div class="vsechnoinside"></div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel - {{ $hotel->name }}</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        * {
+            font-family: "Roboto", sans-serif !important;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        main {
+            display: grid;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 3px solid #019a97;
+            margin-top: 80px;
+        }
+
+        .hotel-main {
+            margin-bottom: 20px;
+        }
+
+        .hotel-name {
+            font-size: 35px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hotel-desc {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .hotel-body {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left {
+            flex: 1;
+        }
+
+        .left img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .reservation-form {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 5px solid lightgray;
+        }
+
+        .reservation-form h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .reservation-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .reservation-form input,
+        .reservation-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .reservation-form button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: black;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .reservation-form button:hover {
+            background-color: #019a97;
+        }
+
+        .login-message {
+            background-color: #ffeb3b;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #333;
+            margin-top: 500px;
+            margin-left: -103%;
+            text-align: center;
+            margin-bottom: -10px;
+        }
 
 
-<div class="card mt-5">
-    <div class="card-body">
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a id="krokzpatky" class="btn btn-primary btn-sm" href="{{ route('dashboard.hotel.index') }}">◀ Zpět</a>
-            <text class="searchtext">Search</text>
-            <div class="kostkamezitexty"></div>
-            <text class="detailstext">Details</text>
+        .hotel-hodnoceni{
+            margin-top: 10px !important;
+        }
 
 
-        <div class="row mt-4">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <h3 class="namehotelu">The Marlton Hotel Suites</h3> <br/> <!-- ZDE NÁZEV HOTELU -->
-                    {{ $hotel->name }}
-                </div>
+
+        .log-in-text{
+            font-weight: bold;
+            color: black;
+            text-decoration: underline 1px solid black !important;
+        }
+
+        
+        .log-in-text:hover {
+            color: black;
+            opacity: 0.8;
+        }
+
+
+
+        .locationbutton{
+            padding: 8px;
+            border-radius: 5px;
+            background-color: transparent;
+            color: black;
+            font-size: 16px;
+            /* cursor: pointer; */
+            transition: background-color 0.3s ease;
+            text-align: left;
+            width: 100%;
+            border: 1px solid lightgray;
+        }
+
+
+        #personodskok{
+            margin-top: 10px;
+        }
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <x-header />
+
+    <main>
+        <div class="hotel-main">
+            <h2 class="hotel-name">{{ $hotel->name }}</h2>
+            <div class="hotel-desc">
+                <p class="hotel-location">{{ $hotel->location }}</p>
+                <p class="hotel-hodnoceni">
+                    @for ($i = 0; $i < $hotel->rating; $i++)
+                        ⭐
+                    @endfor
+                </p>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                    <text class="locationmaintext">Phoenix Street, Northern NYC</text> <br/> <!-- ZDE ADRESA HOTELU -->
-                    <text class="locationmaintexthodnoceni">⭐ 5</text> <br/>
-                    {{ $hotel->location }}
+            <div class="hotel-body">
+                <div class="left">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8a/e0/b9/bellagio-las-vegas.jpg?w=1200&h=-1&s=1" alt="{{ $hotel->name }}">
                 </div>
+                <div class="right">
+                    @if(Auth::check())
+                        <div class="reservation-form">
+                            <form action="{{ route('reservation.store', $hotel->id) }}" method="POST">
+                                @csrf
+                            
+                                <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
-            <img class="obrazeknamain" src="https://the-marlton-hotel.hotels-innewyork.com/data/Pictures/700x500w/6824/682448/682448805/picture-new-york-the-marlton-hotel-1.JPEG"></img>
+                                <label for="guests">Location:</label>
+                                <div class="locationbutton">{{ $hotel->location }}</div>
 
-
-                <div class="form-group">
-                    <strong>Descriptions:</strong> <br/>
-                    {{ $hotel->description }}
-                </div>
-                <div class="form-group">
-                    <strong>Rating:</strong> <br/>
-                    {{ $hotel->rating }}
+                                <label id="personodskok" for="guests">Person:</label>
+                                <input type="number" name="guests" value="1" required min="1">
+                            
+                                <label for="check_in">Check-in:</label>
+                                <input type="date" name="check_in" required>
+                            
+                                <label for="check_out">Check-out:</label>
+                                <input type="date" name="check_out" required>
+                            
+                                <button type="submit">Reserve</button>
+                            </form>                            
+                        </div>
+                    @else
+                        <div class="login-message">
+                        To make a reservation you need to <a href="{{ route('login') }}"><text class="log-in-text">LOG IN</text></a> or <a href="{{ route('register') }}"><text class="log-in-text">REGISTRATION</text></a> !
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
+    </main>
+</body>
 
-    </div>
-</div>
-
-
-
-
-
-
-
-
-<style>
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-*{
-    font-family: "Roboto", sans-serif !important;
-}
-
-.maskovanidiv{
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        margin-left: -0.5%;
-        margin-top: -0.5%;
-        text-align: center;
-        z-index: 1 !important;
-        background-color: white;
-    }
-    
-    .vsechnoinside{
-        border: 4px solid #138d75;
-        border-radius: 20px;
-        position: fixed;
-        width: 90%;
-        margin-left: 4.5%;
-        height: 80vh;
-        margin-top: 7%;
-        text-align: center;
-        z-index: 1 !important;
-        box-shadow: 10px 10px 5px #b2babb;
-    }
-
-    .maskovamainside{
-        position: fixed;
-        width: 100%;
-        height: 15vh;
-        margin-left: -0.5%;
-        margin-top: -0.5%;
-        z-index: 998 !important;
-        background-color: white;
-
-    }
-
-    .maskovamainsidefooter{
-        position: fixed;
-        width: 100%;
-        height: 4.5vh;
-        margin-left: -0.5%;
-        top: 95.5%;
-        z-index: 998 !important;
-        background-color: white;
-
-    }
-
-
-    #krokzpatky{
-        color: black !important;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 9%;
-        margin-left: 8%;
-        font-size: 20px;
-        font-weight: bold;
-        z-index: 10;
-        text-decoration: none;
-        width: 5%;
-        height: 4%;
-        background-color: #eaeaea;
-        border: none;
-        border-radius: 10px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 15px;
-    }
-
-
-    .searchtext{
-        color: #bfbfbf;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 9.25%;
-        margin-left: 14%;
-        font-size: 20px;
-        font-weight: bold;
-        z-index: 10;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-
-
-    .kostkamezitexty{
-        background-color: #4c4c4c;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 9.7%;
-        margin-left: 18.75%;
-        z-index: 10;
-        cursor: pointer;
-        height: 0.8%;
-        width: 0.8%;
-        border-radius: 2px;
-        opacity: 0.75;
-    }
-
-
-    .detailstext{
-        color: #4c4c4c;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 9.25%;
-        margin-left: 21%;
-        font-size: 20px;
-        font-weight: bold;
-        z-index: 10;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .namehotelu{
-        color: black !important;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 13%;
-        margin-left: 8%;
-        font-weight: bold;
-        z-index: 10;
-        font-size: 35px;
-    }
-
-
-    .locationmaintext{
-        color: #6d6d6d !important;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 14%;
-        margin-left: 8%;
-        font-size: 20px;
-        font-weight: 300;
-        z-index: 10;
-        font-size: 25px;
-    }
-
-
-    .locationmaintexthodnoceni{
-        color: black !important;
-        z-index: 3 !important;
-        position: absolute;
-        margin-top: 12.85%;
-        margin-left: 26%;
-        font-size: 20px;
-        font-weight: bold;
-        z-index: 10;
-        font-size: 22px;
-    }
-
-
-
-    .obrazeknamain{
-        position: absolute;
-        width: 63vh;
-        height: 45%;
-        margin-left: 8%;
-        margin-top: 15%;
-        z-index: 1 !important;
-        border-radius: 10px;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
+</html>

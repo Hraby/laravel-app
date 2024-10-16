@@ -103,6 +103,7 @@
     </style>
 </head>
 <body>
+    <x-header/>
     <div class="container">
         <div class="sidebar">
             <div class="profile">
@@ -120,33 +121,28 @@
                 <thead>
                     <tr>
                         <th>Booking</th>
-                        <th>Room</th>
+                        <th>Hotel</th>
                         <th>Guests</th>
                         <th>Check-in</th>
                         <th>Check-out</th>
                         <th>Amount</th>
-                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>766</td>
-                        <td>61</td>
-                        <td>Mike Wazowski</td>
-                        <td>19.12.24</td>
-                        <td>23.12.24</td>
-                        <td>$3,461</td>
-                        <td>All inclusive</td>
-                    </tr>
+                    @foreach ($reservations as $reservation)
+                        <tr>
+                            <td>{{ $reservation->id }}</td>
+                            <td>{{ $reservation->hotel->name }}</td>
+                            <td>{{ $reservation->user->name }}</td>
+                            <td>{{ $reservation->check_in }}</td>
+                            <td>{{ $reservation->check_out }}</td>
+                            <td>${{ number_format($reservation->amount, 2) }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
             <div class="pagination">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>....</span>
-                <span>6</span>
             </div>
         </div>
     </div>

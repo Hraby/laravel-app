@@ -59,7 +59,9 @@
 
         public function publicIndex()
         {
-            $hotels = Hotel::where('is_public', true)->get();
+            $hotels = Hotel::all(); 
             return view('hotel.index', compact('hotels'));
         }
+
+
     }
