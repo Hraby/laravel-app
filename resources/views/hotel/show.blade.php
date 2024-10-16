@@ -224,6 +224,8 @@
                         <div class="login-message">
                         To make a reservation you need to <a href="{{ route('login') }}"><text class="log-in-text">LOG IN</text></a> or <a href="{{ route('register') }}"><text class="log-in-text">REGISTRATION</text></a> !
                         </div>
+
+                        
                     @endif
                 </div>
             </div>
