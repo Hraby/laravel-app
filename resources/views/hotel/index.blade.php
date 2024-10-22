@@ -169,9 +169,6 @@
 
 
         /* ------------------------------------------ */
-
-
-
         @media (max-width: 1570px) {
             
             .sidebar {
@@ -183,9 +180,6 @@
     
     
             /* ------------------------------------------ */
-
-
-
             @media (max-width: 1470px) {
             
             .sidebar {
@@ -194,13 +188,8 @@
                 height: 650px;
             }
     
-    
-            }
-    
-    
+            } 
             /* ------------------------------------------ */
-
-
 
             @media (max-width: 1340px) {
             
@@ -208,17 +197,10 @@
                 transform: translateX(-50px);
                 min-width: 100%;
                 height: 650px;
+            }  
             }
-    
-    
-            }
-    
-
 
             /* ------------------------------------------ */
-
-
-
             @media (max-width: 1280px) {
             
             .sidebar {
@@ -227,11 +209,8 @@
                 height: 650px;
             }
     
-    
             }
-    
             /* ------------------------------------------ */
-
 
         @media (max-width: 768px) {
             main {
@@ -305,6 +284,7 @@
                             ⭐ 
                         @endfor
                     </p>
+                    <p>${{$hotel->price}}/person</p>
                     <a href="{{ route('hotel.show', $hotel->slug) }}">View more</a>
                 </div>
                 @endforeach

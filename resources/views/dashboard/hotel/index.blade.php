@@ -1,251 +1,174 @@
-@extends('dashboard.hotel.layout')
-
-@section('content')
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management</title>
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        .sidebar {
+            background-color: #019A97;
+            padding: 20px;
+            width: 250px;
+            color: white;
+        }
 
-    * {
-        font-family: "Roboto", sans-serif !important;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-    body {
-        background-color: #f5f5f5;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
+        .sidebar ul li {
+            margin-bottom: 20px;
+        }
 
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-    .create-new-hotel{
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        background-color: yellow;
-        border: none;
-        font-weight: bold;
-        text-align: center;
-        display: grid;
-    }
+        .sidebar ul li a:hover {
+            background-color: #017f7c;
+        }
 
-    #tabledata th{
-        width: 100px;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: none;
-        font-weight: bold;
-        text-align: center;
-        border: 1px solid black;
-    }
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #fff;
+        }
 
-    .thbarvayellow{
-        background-color: #019a97 !important;
-    }
+        .main-content h1 {
+            color: #019A97;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
 
-    .thbarvared{
-        background-color: #00db00 !important;
-    }
+        .table-container {
+            margin-top: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .thbarvablue{
-        background-color: #019a97 !important;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .thbarvagreen{
-        background-color: #00db00 !important;
-    }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
+        table th {
+            background-color: #019A97;
+            color: white;
+        }
 
-    .td1center{
-        width: 5%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        background-color: #b2fcfa !important;
-        border: none;
-        font-weight: bold;
-        text-align: center;
-        border: 1px solid black;
-    }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
 
+        .btn-primary {
+            background-color: #019A97;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            font-size: 14px;
+        }
 
-    .td2center{
-        width: 8px;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        background-color: #a8ffa8 !important;
-        border: none;
-        font-weight: bold;
-        text-align: center;
-        border: 1px solid black;
-    }
-
-
-    .td3center{
-        width: 20px;
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        background-color: #b2fcfa !important;
-        border: none;
-        font-weight: normal;
-        text-align: center;
-        font-size: 12px;
-        border: 1px solid black;
-    }
-
-
-    .button-group {
-        display: flex;
-        gap: 10px;
-        margin-right: 0px;
-        display: grid;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 10px;
-    }
-
-    .show-btn {
-        background-color: lightgreen !important;
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        border: 1px solid black;
-        text-align: center;
-    }
-
-    .edit-btn {
-        background-color: yellow !important;
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        border: 1px solid black;
-        text-align: center;
-    }
-
-    .delete-btn {
-        background-color: #ffb2b2 !important;
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        border: 1px solid black;
-        text-align: center;
-    }
-
-
-    .carka{
-        background-color: black !important;
-        width: 100px;
-        height: 1px;
-        display: grid;
-        margin-top: 0px;
-    }
-
-
-
+        .btn-primary:hover {
+            background-color: #017f7c;
+            cursor: pointer;
+        }
     </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </head>
 
-<x-header/>
-<div class="card mt-5">
-    <!-- <h2 class="card-header">Hotely</h2> -->
-    <div class="card-body">
-        
-        @if(session('success'))
-            <div class="alert alert-success" role="alert">{{ session('success') }}</div>
-        @endif
+<body>
+        <x:header/>
+        <div class="container">
+            <div class="sidebar">
+                <h2>Hotel Management</h2>
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="{{ route('dashboard.hotel.index') }}">Manage Hotels</a></li>
+                    <li><a href="{{ route('dashboard.reservations.index') }}">Manage Reservations</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                </ul>
+            </div>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-success btn-sm" href="{{ route('dashboard.hotel.create') }}"><text class="create-new-hotel">Create New Hotel</text></a>
+            <div class="main-content">
+                <h1>Manage Hotels</h1>
+
+                <a href="{{ route('dashboard.hotel.create') }}" class="btn-primary">Add New Hotel</a>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($hotels as $hotel)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $hotel->name }}</td>
+                                <td>{{ $hotel->description }}</td>
+                                <td>
+                                    <a href="{{ route('hotel.show', $hotel->slug) }}" class="btn-primary">View</a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('dashboard.hotel.edit', $hotel->id) }}" class="btn-primary">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('dashboard.hotel.destroy', $hotel->id) }}" method="POST" style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-primary">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <table id="tabledata" class="table table-bordered table-striped mt-4">
-            <thead>
-                <tr>
-                    <th class="thbarvayellow" width="80px">No</th>
-                    <th class="thbarvared">Name</th>
-                    <th class="thbarvablue">Description</th>
-                    <th class="thbarvagreen" width="250px">Action</th>
-                </tr>
-            </thead>
+</body>
 
-            <tbody>
-                @php $i = 0; @endphp 
-                @forelse ($hotels as $hotel)
-                    <tr>
-                        <td class="td1center">{{ ++$i }}</td>
-                        <td class="td2center">{{ $hotel->name }}</td>
-                        <td class="td3center">{{ $hotel->description }}</td>
-                        <td>
-                            <!-- <form action="{{ route('dashboard.hotel.destroy',$hotel->id) }}" method="POST">
-                                <a class="btn btn-info btn-sm" href="{{ route('hotel.show',$hotel->slug) }}"><i class="fa-solid fa-list"></i> Show</a>
-                                <a class="btn btn-primary btn-sm" href="{{ route('dashboard.hotel.edit', $hotel->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
-                            </form> -->
-
-                            <form action="{{ route('dashboard.hotel.destroy',$hotel->id) }}" method="POST" class="button-group">
-                                <a class="btn btn-info btn-sm show-btn" href="{{ route('hotel.show',$hotel->slug) }}">
-                                    <i class="fa-solid fa-list"></i> Show
-                                </a>
-
-                                <a class="btn btn-primary btn-sm edit-btn" href="{{ route('dashboard.hotel.edit', $hotel->id) }}">
-                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                </a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm delete-btn">
-                                    <i class="fa-solid fa-trash"></i> Delete
-                                </button>
-
-                                <div class="carka"></div>
-                            </form>
-
-
-
-
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4">There are no data.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-</div>  
-
-@endsection
 </html>

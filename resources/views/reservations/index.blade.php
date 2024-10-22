@@ -188,7 +188,7 @@
                             <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8a/e0/b9/bellagio-las-vegas.jpg?w=1200&h=-1&s=1" alt="{{ $reservation->hotel->name }}">
                             <div class="reservation-details">
                                 <h3>{{ $reservation->hotel->name }}</h3>
-                                <p>{{ $reservation->guests }} Person</p>
+                                <p>{{ $reservation->guests }} Guests</p>
                                 <p>{{ $reservation->check_in }} - {{ $reservation->check_out }}</p>
                                 <p class="reservation-price">All inclusive <strong>{{ $reservation->price }} $</strong></p>
                                 <p>
@@ -196,7 +196,6 @@
                                         ★
                                     @endfor
                                 </p>
-                                <p><span class="info">Click for more INFO</span></p>
                             </div>
                         </div>
                     @endforeach

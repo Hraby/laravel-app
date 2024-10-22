@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Reservations Page</title>
+    <title>Hotel Management</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
@@ -19,132 +20,143 @@
         }
 
         .sidebar {
-            background-color: #efefef;
+            background-color: #019A97;
             padding: 20px;
             width: 250px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #017f7c;
         }
 
         .main-content {
             flex: 1;
             padding: 40px;
+            background-color: #fff;
         }
 
-        .profile {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .profile img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-
-        .profile h2 {
-            font-size: 20px;
-            margin: 10px 0 5px;
-        }
-
-        .profile p {
-            font-size: 14px;
-            color: #666;
-        }
-
-        h1 {
-            font-size: 24px;
+        .main-content h1 {
+            color: #019A97;
+            font-size: 28px;
             margin-bottom: 20px;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         table th, table td {
             padding: 12px;
-            text-align: center;
+            text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
         table th {
-            background-color: #f9f9f9;
+            background-color: #019A97;
+            color: white;
         }
 
         table tr:hover {
             background-color: #f1f1f1;
         }
 
-        .search-bar {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+        .btn-primary {
+            background-color: #019A97;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            font-size: 14px;
         }
 
-        .pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .pagination span {
-            margin: 0 5px;
+        .btn-primary:hover {
+            background-color: #017f7c;
             cursor: pointer;
-        }
-
-        .pagination span:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
-<body>
-    <x-header/>
-    <div class="container">
-        <div class="sidebar">
-            <div class="profile">
-                <img src="profile-image.jpg" alt="Admin">
-                <h2>Gigachad</h2>
-                <p>Admin</p>
-            </div>
-        </div>
-        
-        <div class="main-content">
-            <h1>Reservations</h1>
-            <input type="text" class="search-bar" placeholder="Search by guest, reservation...">
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Booking</th>
-                        <th>Hotel</th>
-                        <th>Guests</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($reservations as $reservation)
-                        <tr>
-                            <td>{{ $reservation->id }}</td>
-                            <td>{{ $reservation->hotel->name }}</td>
-                            <td>{{ $reservation->user->name }}</td>
-                            <td>{{ $reservation->check_in }}</td>
-                            <td>{{ $reservation->check_out }}</td>
-                            <td>${{ number_format($reservation->amount, 2) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
 
-            <div class="pagination">
+<body>
+        <x:header/>
+        <div class="container">
+            <div class="sidebar">
+                <h2>Hotel Management</h2>
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="{{ route('dashboard.hotel.index') }}">Manage Hotels</a></li>
+                    <li><a href="{{ route('dashboard.reservations.index') }}">Manage Reservations</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <h1>Manage Reservations</h1>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Booking</th>
+                                <th>Hotel</th>
+                                <th>Guests</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reservations as $reservation)
+                                <tr>
+                                    <td>{{ $reservation->id }}</td>
+                                    <td>{{ $reservation->hotel->name }}</td>
+                                    <td>{{ $reservation->user->name }} - {{ $reservation->guests }}</td>
+                                    <td>{{ $reservation->check_in }}</td>
+                                    <td>{{ $reservation->check_out }}</td>
+                                    <td>${{ number_format($reservation->price) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+
 </body>
+
 </html>

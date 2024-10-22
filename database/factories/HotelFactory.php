@@ -25,6 +25,7 @@ class HotelFactory extends Factory
             'slug' => function (array $hotel) {
                 return Str::slug($hotel['name']);
             },
+            'price' => rand(50, 1200),
         ];
     }
 }

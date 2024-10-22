@@ -57,6 +57,7 @@ class ReservationController extends Controller
             'check_in' => $request->input('check_in'),
             'check_out' => $request->input('check_out'),
             'guests' => $request->input('guests'),
+            'price' => $request->input('price'),
         ]);
 
         return redirect()->route('reservation.index');

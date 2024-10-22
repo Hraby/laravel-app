@@ -1,188 +1,232 @@
-@extends('dashboard.hotel.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
+        .form-group input.error, .form-group textarea.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+        .form-actions {
+            margin-bottom: 20px;
+        }
+        .back-button {
+            background-color: #4CAF87;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .submit-button {
+            background-color: #019A97;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .rooms-section {
+            margin-top: 20px;
+        }
+        .room {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .room h5 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<x-header/>
+<div class="container">
+    <h2>Add New Hotel</h2>
+    <div class="form-actions">
+        <a class="back-button" href="{{ route('dashboard.hotel.index') }}">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
+    </div>
 
-@section('content')
+    <form action="{{ route('dashboard.hotel.store') }}" method="POST">
+        @csrf
 
-<div class="card mt-5">
-    <h2 class="card-header">Add New Hotel</h2>
-    <div class="card-body">
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-primary btn-sm" href="{{ route('dashboard.hotel.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+        <div class="form-group">
+            <label for="inputName"><strong>Name:</strong></label>
+            <input 
+                type="text" 
+                name="name" 
+                value="{{ old('name') }}"
+                class="@error('name') error @enderror" 
+                id="inputName" 
+                placeholder="Enter hotel name"
+                oninput="generateSlug()">
+            @error('name')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
-        <form action="{{ route('dashboard.hotel.store') }}" method="POST"> 
-            @csrf
+        <div class="form-group">
+            <label for="inputSlug"><strong>Slug:</strong></label>
+            <input 
+                type="text" 
+                name="slug" 
+                value="{{ old('slug') }}"
+                class="@error('slug') error @enderror" 
+                id="inputSlug" 
+                placeholder="Generated slug" 
+                readonly>
+            @error('slug')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <!-- Hotel Name -->
-            <div class="mb-3">
-                <label for="inputName" class="form-label"><strong>Name:</strong></label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    class="form-control @error('name') is-invalid @enderror" 
-                    id="inputName" 
-                    placeholder="Hotel Name"
-                    oninput="generateSlug()">
-                @error('name')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+        <div class="form-group">
+            <label for="inputLocation"><strong>Location:</strong></label>
+            <input 
+                type="text" 
+                name="location" 
+                value="{{ old('location') }}"
+                class="@error('location') error @enderror" 
+                id="inputLocation" 
+                placeholder="Enter location">
+            @error('location')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <!-- Slug -->
-            <div class="mb-3">
-                <label for="inputSlug" class="form-label"><strong>Slug:</strong></label>
-                <input 
-                    type="text" 
-                    name="slug" 
-                    class="form-control @error('slug') is-invalid @enderror" 
-                    id="inputSlug" 
-                    placeholder="Slug (generated automatically)"
-                    readonly>
-                @error('slug')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+        <div class="form-group">
+            <label for="inputRating"><strong>Rating:</strong></label>
+            <input 
+                type="number" 
+                name="rating" 
+                value="{{ old('rating') }}"
+                class="@error('rating') error @enderror" 
+                id="inputRating" 
+                placeholder="Rating (1-5)"
+                min="1" max="5">
+            @error('rating')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <!-- Location -->
-            <div class="mb-3">
-                <label for="inputLocation" class="form-label"><strong>Location:</strong></label>
-                <input 
-                    type="text" 
-                    name="location" 
-                    class="form-control @error('location') is-invalid @enderror" 
-                    id="inputLocation" 
-                    placeholder="Hotel Location">
-                @error('location')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+        <div class="form-group">
+            <label for="inputDescription"><strong>Description:</strong></label>
+            <textarea 
+                class="@error('description') error @enderror" 
+                name="description" 
+                id="inputDescription" 
+                placeholder="Enter hotel description">{{ old('description') }}</textarea>
+            @error('description')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
 
-            <!-- Rating -->
-            <div class="mb-3">
-                <label for="inputRating" class="form-label"><strong>Rating:</strong></label>
-                <input 
-                    type="number" 
-                    name="rating" 
-                    class="form-control @error('rating') is-invalid @enderror" 
-                    id="inputRating" 
-                    placeholder="Rating (1-5)"
-                    min="1" max="5">
-                @error('rating')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Description -->
-            <div class="mb-3">
-                <label for="inputDescription" class="form-label"><strong>Description:</strong></label>
-                <textarea 
-                    class="form-control @error('description') is-invalid @enderror" 
-                    style="height:150px" 
-                    name="description" 
-                    id="inputDescription" 
-                    placeholder="Description"></textarea>
-                @error('description')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Rooms Section -->
-            <h3>Pokoje</h3>
-            <div id="rooms">
-                <!-- Default Room Input if Hotel has No Rooms Yet -->
-                <div class="mb-3 room" data-index="0">
-                    <label for="roomName" class="form-label"><strong>Room Name:</strong></label>
+        <h3>Pokoje</h3>
+        <div id="rooms" class="rooms-section">
+            <div class="room">
+                <h5>Room 1</h5>
+                <div class="form-group">
+                    <label for="roomName0"><strong>Room Name:</strong></label>
                     <input 
                         type="text" 
                         name="rooms[0][name]" 
-                        class="form-control @error('rooms.0.name') is-invalid @enderror"
-                        placeholder="Room Name">
+                        class="@error('rooms.0.name') error @enderror"
+                        id="roomName0"
+                        placeholder="Enter room name">
                     @error('rooms.0.name')
-                        <div class="form-text text-danger">{{ $message }}</div>
+                        <div class="error-message">{{ $message }}</div>
                     @enderror
+                </div>
 
-                    <label for="roomCapacity" class="form-label"><strong>Capacity (1-4):</strong></label>
+                <div class="form-group">
+                    <label for="roomCapacity0"><strong>Capacity (1-4):</strong></label>
                     <input 
                         type="number" 
                         name="rooms[0][capacity]" 
-                        class="form-control @error('rooms.0.capacity') is-invalid @enderror"
-                        placeholder="Capacity (1-4)" 
-                        min="1" max="4">
+                        class="@error('rooms.0.capacity') error @enderror"
+                        id="roomCapacity0"
+                        placeholder="Enter capacity (1-4)" 
+                        min="1" 
+                        max="4">
                     @error('rooms.0.capacity')
-                        <div class="form-text text-danger">{{ $message }}</div>
+                        <div class="error-message">{{ $message }}</div>
                     @enderror
+                </div>
 
-                    <label for="roomPrice" class="form-label"><strong>Price per Night:</strong></label>
+                <div class="form-group">
+                    <label for="roomPrice0"><strong>Price per Night:</strong></label>
                     <input 
                         type="text" 
                         name="rooms[0][price_per_night]" 
-                        class="form-control @error('rooms.0.price_per_night') is-invalid @enderror"
-                        placeholder="Price per Night">
+                        class="@error('rooms.0.price_per_night') error @enderror"
+                        id="roomPrice0"
+                        placeholder="Enter price per night">
                     @error('rooms.0.price_per_night')
-                        <div class="form-text text-danger">{{ $message }}</div>
+                        <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
+        </div>
 
-            <!-- Add New Room Button -->
-            <button type="button" class="btn btn-info mb-3" id="addRoomBtn"><i class="fa fa-plus"></i> Add Room</button>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Hotel</button>
-        </form>
-
-    </div>
+        <button type="submit" class="submit-button">Add Hotel</button>
+    </form>
 </div>
 
 <script>
-    // Automatické generování slugu při změně názvu
     function generateSlug() {
         let name = document.getElementById('inputName').value;
         let slug = name.toLowerCase()
-                       .replace(/[^a-z0-9 -]/g, '')     // odstraní speciální znaky
-                       .replace(/\s+/g, '-')             // nahrazuje mezery pomlčkami
-                       .replace(/-+/g, '-');             // zamezí více pomlčkám za sebou
+                       .replace(/[^a-z0-9 -]/g, '')
+                       .replace(/\s+/g, '-')
+                       .replace(/-+/g, '-');
         document.getElementById('inputSlug').value = slug;
-    }
-
-    // Dynamicky přidat nové pokoje
-    document.getElementById('addRoomBtn').addEventListener('click', function () {
-        let roomIndex = document.querySelectorAll('.room').length;
-        let roomHTML = `
-            <div class="mb-3 room" data-index="${roomIndex}">
-                <label for="roomName" class="form-label"><strong>Room Name:</strong></label>
-                <input 
-                    type="text" 
-                    name="rooms[${roomIndex}][name]" 
-                    class="form-control" 
-                    placeholder="Room Name">
-                
-                <label for="roomCapacity" class="form-label"><strong>Capacity (1-4):</strong></label>
-                <input 
-                    type="number" 
-                    name="rooms[${roomIndex}][capacity]" 
-                    class="form-control" 
-                    placeholder="Capacity (1-4)" 
-                    min="1" max="4">
-                
-                <label for="roomPrice" class="form-label"><strong>Price per Night:</strong></label>
-                <input 
-                    type="text" 
-                    name="rooms[${roomIndex}][price_per_night]" 
-                    class="form-control" 
-                    placeholder="Price per Night">
-                
-                <button type="button" class="btn btn-danger btn-sm remove-room-btn" onclick="removeRoom(this)">Remove Room</button>
-            </div>
-        `;
-        document.getElementById('rooms').insertAdjacentHTML('beforeend', roomHTML);
-    });
-
-    // Odstranit pokoj
-    function removeRoom(button) {
-        let roomDiv = button.closest('.room');
-        roomDiv.remove();
     }
 </script>
 
-@endsection
+</body>
+</html>
